@@ -1,6 +1,7 @@
 package com.algoDomain.services;
 
 import com.algoDomain.dto.ProductRequestDto;
+import com.algoDomain.dto.ProductResponse;
 import com.algoDomain.entity.Product;
 import com.algoDomain.exceptions.ProductAlreadyPresentException;
 import com.algoDomain.exceptions.ProductNotFoundException;
@@ -20,9 +21,10 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     private ProductMapper productMapper;
 
+    @Override
     public ResponseEntity<?> saveProduct(ProductRequestDto product) throws ProductAlreadyPresentException {
         Optional<Product> optionalProduct = productRepo.findByName(product.getProductName());
-        if (optionalProduct.isPresent()){
+        if (optionalProduct.isPresent()) {
             throw new ProductAlreadyPresentException("Product is already present");
         }
 
@@ -30,30 +32,46 @@ public class ProductServiceImpl implements ProductService {
         return ResponseEntity.ok("Product Added Successfully");
     }
 
+    @Override
     public ResponseEntity<?> deleteProduct(Long productId) throws ProductNotFoundException {
         Optional<Product> product = productRepo.findById(productId);
-        if (product.isPresent()){
+        if (product.isPresent()) {
             productRepo.deleteById(productId);
-        }
-        else{
+        } else {
             throw new ProductNotFoundException("Product is not present");
-
         }
         return ResponseEntity.ok("Product deleted successfully");
 
     }
-    public ResponseEntity<?> updateProduct(long pid,ProductRequestDto product) throws ProductNotFoundException {
+
+    @Override
+    public ResponseEntity<?> updateProduct(long pid, ProductRequestDto product) throws ProductNotFoundException, ProductAlreadyPresentException {
         Optional<Product> optionalProduct = productRepo.findById(pid);
-        if (optionalProduct.isPresent()){
+        if (optionalProduct.isPresent()) {
+            Optional<Product> optionalProduct1 = productRepo.findByName(product.getProductName());
+            if (optionalProduct1.isPresent()) {
+                throw new ProductAlreadyPresentException("Product with name " + product.getProductName() + " Already exist");
+            }
             Product product1 = productMapper.DtotoProd(product);
             product1.setProductId(pid);
+
             productRepo.save(product1);
-        }
-        else{
+        } else {
             throw new ProductNotFoundException("Product is not present");
 
         }
         return ResponseEntity.ok("Product updated successfully");
+
+    }
+
+    @Override
+    public ResponseEntity<?> getProduct(Long pid) throws ProductNotFoundException {
+        Optional<Product> optionalProduct = productRepo.findById(pid);
+        if (optionalProduct == null) {
+            throw new ProductNotFoundException("Product is not present");
+        }
+        ProductResponse productResponse = productMapper.ProdToProdResponse(optionalProduct.get());
+        return ResponseEntity.ok(productResponse);
 
     }
 

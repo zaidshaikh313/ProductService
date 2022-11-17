@@ -31,11 +31,11 @@ public class ProductServiceApplication implements CommandLineRunner {
 		categoryRepo.save(cat2);
 		categoryRepo.save(cat3);
 		categoryRepo.save(cat4);
-		Product product =new Product("Lenovo Yoga","Laptop",45000L,cat1);
-		Product product1 =new Product("LG Washing Machine ","Washing Machine",25000L,cat2);
-		Product product2 =new Product("HP Pavilion 360","Laptop",60000L,cat1);
-		Product product3 =new Product("US Polo Assn","T-Shirt",1200L,cat3);
-		Product product4 =new Product("Neelkamal Been Bag","Sofa Set",350L,cat4);
+		Product product =new Product("Lenovo Yoga","Laptop",45000f,cat1);
+		Product product1 =new Product("LG Washing Machine ","Washing Machine",25000f,cat2);
+		Product product2 =new Product("HP Pavilion 360","Laptop",60000f,cat1);
+		Product product3 =new Product("US Polo Assn","T-Shirt",1200f,cat3);
+		Product product4 =new Product("Neelkamal Been Bag","Sofa Set",350f,cat4);
 		productRepo.save(product);
 		productRepo.save(product1);
 		productRepo.save(product2);

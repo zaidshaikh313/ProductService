@@ -9,13 +9,13 @@ public class Product {
     private Long productId;
     private String name;
     private String productType;
-    private Long basePrice;
+    private float basePrice;
 
     @ManyToOne(cascade=CascadeType.REFRESH)
     @JoinColumn(name="pr_cat_id")
     private Category cat;
 
-    public Product(String name, String productType, Long basePrice, Category cat) {
+    public Product(String name, String productType, float basePrice, Category cat) {
         this.name = name;
         this.productType = productType;
         this.basePrice = basePrice;
@@ -49,11 +49,11 @@ public class Product {
         this.productType = productType;
     }
 
-    public Long getBasePrice() {
+    public float getBasePrice() {
         return basePrice;
     }
 
-    public void setBasePrice(Long basePrice) {
+    public void setBasePrice(float basePrice) {
         this.basePrice = basePrice;
     }
 

@@ -12,14 +12,14 @@ public class Category {
 
     private String cat_name;
 
-    private int discount;
-    private int gst;
-    private int del_charges;
+    private float discount;
+    private float gst;
+    private float del_charges;
 
     public Category() {
     }
 
-    public Category(String cat_name, int discount, int gst, int del_charges) {
+    public Category(String cat_name, float discount, float gst, float del_charges) {
         this.cat_name = cat_name;
         this.discount = discount;
         this.gst = gst;
@@ -42,27 +42,27 @@ public class Category {
         this.cat_name = cat_name;
     }
 
-    public int getDiscount() {
+    public float getDiscount() {
         return discount;
     }
 
-    public void setDiscount(int discount) {
+    public void setDiscount(float discount) {
         this.discount = discount;
     }
 
-    public int getGst() {
+    public float getGst() {
         return gst;
     }
 
-    public void setGst(int gst) {
+    public void setGst(float gst) {
         this.gst = gst;
     }
 
-    public int getDel_charges() {
+    public float getDel_charges() {
         return del_charges;
     }
 
-    public void setDel_charges(int del_charges) {
+    public void setDel_charges(float del_charges) {
         this.del_charges = del_charges;
     }
 

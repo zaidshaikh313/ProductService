@@ -19,6 +19,20 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
+    @GetMapping("/{pid}")
+    public ResponseEntity<?> getProduct(@PathVariable("pid") long pid){
+        try{
+           return productService.getProduct(pid);
+        }
+        catch (ProductNotFoundException exception){
+            return new ResponseEntity<ServerResponse>(new ServerResponse(exception.getMessage()), HttpStatus.BAD_REQUEST);
+        }
+        catch (Exception exception){
+            return new ResponseEntity<ServerResponse>(new ServerResponse(exception.getMessage()), HttpStatus.BAD_REQUEST);
+
+        }
+    }
+
 
     @PostMapping()
     public ResponseEntity<?> addProd(@RequestBody ProductRequestDto product) {
@@ -55,6 +69,10 @@ public class ProductController {
             return productService.updateProduct(pid,productRequestDto);
         }
         catch (ProductNotFoundException exception){
+            return new ResponseEntity<ServerResponse>(new ServerResponse(exception.getMessage()), HttpStatus.BAD_REQUEST);
+
+        }
+        catch (ProductAlreadyPresentException exception){
             return new ResponseEntity<ServerResponse>(new ServerResponse(exception.getMessage()), HttpStatus.BAD_REQUEST);
 
         }

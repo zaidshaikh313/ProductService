@@ -9,9 +9,9 @@ public class ProductRequestDto {
 
     private String catName;
 
-    private Long basePrice;
+    private float basePrice;
 
-    public ProductRequestDto(long productId, String productName, String productType, String catName, Long basePrice) {
+    public ProductRequestDto(long productId, String productName, String productType, String catName, float basePrice) {
         this.productName = productName;
         this.productType = productType;
         this.catName = catName;
@@ -46,11 +46,11 @@ public class ProductRequestDto {
         this.catName = catName;
     }
 
-    public Long getBasePrice() {
+    public float getBasePrice() {
         return basePrice;
     }
 
-    public void setBasePrice(Long basePrice) {
+    public void setBasePrice(float basePrice) {
         this.basePrice = basePrice;
     }
 }
