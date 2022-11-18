@@ -5,6 +5,8 @@ import com.algoDomain.exceptions.ProductNotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public interface ProductService {
 
@@ -17,5 +19,7 @@ public interface ProductService {
     public ResponseEntity<?> getProduct(Long pid) throws ProductNotFoundException;
 
 
+
+    public ResponseEntity<?> getAllProducts();
 
 }

@@ -11,16 +11,28 @@ public class Product {
     private String productType;
     private float basePrice;
 
+    private boolean inCart;
+
+    public boolean isInCart() {
+        return inCart;
+    }
+
+    public void setInCart(boolean inCart) {
+        this.inCart = inCart;
+    }
+
+    public Product(String name, String productType, float basePrice, boolean inCart, Category cat) {
+        this.name = name;
+        this.productType = productType;
+        this.basePrice = basePrice;
+        this.inCart = inCart;
+        this.cat = cat;
+    }
+
     @ManyToOne(cascade=CascadeType.REFRESH)
     @JoinColumn(name="pr_cat_id")
     private Category cat;
 
-    public Product(String name, String productType, float basePrice, Category cat) {
-        this.name = name;
-        this.productType = productType;
-        this.basePrice = basePrice;
-        this.cat = cat;
-    }
 
     public Product() {
     }

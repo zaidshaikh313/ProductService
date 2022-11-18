@@ -23,6 +23,7 @@ public class ProductMapper {
         product.setName(productRequestDto.getProductName());
         product.setProductType(productRequestDto.getProductType());
         product.setBasePrice(productRequestDto.getBasePrice());
+        product.setInCart(false);
         Category category = categoryRepo.findByCat_Name(productRequestDto.getCatName()).get();
         product.setCat(category);
         return product;
