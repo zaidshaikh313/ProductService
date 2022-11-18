@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/cart")
+@CrossOrigin("http://localhost:4200")
 public class CartContoller {
 
     @Autowired
@@ -53,7 +54,8 @@ public class CartContoller {
     }
     @GetMapping("/products")
     public ResponseEntity<?> getAllProducts(){
-        return productService.getAllProducts();
+
+        return new ResponseEntity<>( productService.getAllProducts(),HttpStatus.ACCEPTED);
     }
 
 

@@ -25,6 +25,13 @@ public class Category {
         this.gst = gst;
         this.del_charges = del_charges;
     }
+    public Category(Long cat_id,String cat_name, float discount, float gst, float del_charges) {
+        this.cat_name = cat_name;
+        this.cat_id=cat_id;
+        this.discount = discount;
+        this.gst = gst;
+        this.del_charges = del_charges;
+    }
 
     public Long getCat_id() {
         return cat_id;

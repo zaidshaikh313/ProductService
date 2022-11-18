@@ -8,8 +8,6 @@ import com.algoDomain.exceptions.ProductNotFoundException;
 import com.algoDomain.mappers.ProductMapper;
 import com.algoDomain.repositories.ProductRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -24,27 +22,32 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     private ProductMapper productMapper;
 
+    public ProductServiceImpl(ProductRepo productRepo) {
+        this.productRepo = productRepo;
+    }
+
     @Override
-    public ResponseEntity<?> saveProduct(ProductRequestDto product) throws ProductAlreadyPresentException {
+    public String saveProduct(ProductRequestDto product) throws ProductAlreadyPresentException {
         Optional<Product> optionalProduct = productRepo.findByName(product.getProductName());
         if (optionalProduct.isPresent()) {
             throw new ProductAlreadyPresentException("Product is already present");
         }
-        productRepo.save(productMapper.DtotoProd(product));
-        return ResponseEntity.ok("Product Added Successfully");
+        Product product1 = productMapper.DtotoProd(product);
+        productRepo.save(product1);
+        return "Product Added Successfully";
     }
 
     @Override
-    public ResponseEntity<?> deleteProduct(Long productId) throws ProductNotFoundException {
+    public String deleteProduct(Long productId) throws ProductNotFoundException {
         Optional<Product> product = productRepo.findById(productId);
         product.orElseThrow(() -> new ProductNotFoundException("Product is not present"));
         productRepo.deleteById(productId);
-        return ResponseEntity.ok("Product deleted successfully");
+        return "Product deleted successfully";
 
     }
 
     @Override
-    public ResponseEntity<?> updateProduct(long pid, ProductRequestDto product) throws ProductNotFoundException, ProductAlreadyPresentException {
+    public String updateProduct(long pid, ProductRequestDto product) throws ProductNotFoundException, ProductAlreadyPresentException {
         Optional<Product> optionalProduct = productRepo.findById(pid);
         optionalProduct.orElseThrow(() -> new ProductNotFoundException("Product is not present"));
         Optional<Product> optionalProduct1 = productRepo.findByName(product.getProductName());
@@ -56,33 +59,33 @@ public class ProductServiceImpl implements ProductService {
 
         productRepo.save(product1);
 
-        return ResponseEntity.ok("Product updated successfully");
+       return  "Product updated successfully";
 
     }
 
     @Override
-    public ResponseEntity<?> getProduct(Long pid) throws ProductNotFoundException {
+    public ProductResponse getProduct(Long pid) throws ProductNotFoundException {
         Optional<Product> optionalProduct = productRepo.findById(pid);
         optionalProduct.orElseThrow(() -> new ProductNotFoundException("Product is not present"));
 //        if (optionalProduct == null) {
 //            throw new ProductNotFoundException("Product is not present");
 //        }
         ProductResponse productResponse = productMapper.ProdToProdResponse(optionalProduct.get());
-        return ResponseEntity.ok(productResponse);
+        return (productResponse);
 
     }
 
 
 
     @Override
-    public ResponseEntity<?> getAllProducts() {
+    public List<ProductResponse> getAllProducts() {
         List<ProductResponse> productResponseList =new ArrayList<>();
        productRepo.findAll().forEach(product -> {
            productResponseList.add(productMapper.ProdToProdResponse(product));
 
        });
 
-        return new ResponseEntity<>(productResponseList, HttpStatus.ACCEPTED);
+        return productResponseList;
     }
 
 

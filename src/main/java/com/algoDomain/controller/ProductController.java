@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/prod")
+@CrossOrigin("http://localhost:4200")
 public class ProductController {
 
 
@@ -22,7 +23,7 @@ public class ProductController {
     @GetMapping("/{pid}")
     public ResponseEntity<?> getProduct(@PathVariable("pid") long pid){
         try{
-           return productService.getProduct(pid);
+           return new ResponseEntity<>( productService.getProduct(pid),HttpStatus.ACCEPTED);
         }
         catch (ProductNotFoundException exception){
             return new ResponseEntity<ServerResponse>(new ServerResponse(exception.getMessage()), HttpStatus.BAD_REQUEST);
@@ -37,7 +38,7 @@ public class ProductController {
     @PostMapping()
     public ResponseEntity<?> addProd(@RequestBody ProductRequestDto product) {
         try {
-            return productService.saveProduct(product);
+            return new ResponseEntity<>( productService.saveProduct(product),HttpStatus.ACCEPTED);
         }
         catch (ProductAlreadyPresentException exception){
             return new ResponseEntity<ServerResponse>(new ServerResponse(exception.getMessage()), HttpStatus.BAD_REQUEST);
@@ -51,7 +52,7 @@ public class ProductController {
     @DeleteMapping("/{pid}")
     public ResponseEntity<?> deleteProd(@PathVariable("pid") long pid) {
         try {
-            return productService.deleteProduct(pid);
+            return new ResponseEntity<>(productService.deleteProduct(pid),HttpStatus.OK);
         }
         catch (ProductNotFoundException exception){
             return new ResponseEntity<ServerResponse>(new ServerResponse(exception.getMessage()), HttpStatus.BAD_REQUEST);
@@ -66,7 +67,7 @@ public class ProductController {
     @PutMapping("/{pid}")
     public ResponseEntity<?> updateProd(@PathVariable("pid") long pid, @RequestBody ProductRequestDto productRequestDto) {
         try {
-            return productService.updateProduct(pid,productRequestDto);
+            return new ResponseEntity<>( productService.updateProduct(pid,productRequestDto),HttpStatus.ACCEPTED);
         }
         catch (ProductNotFoundException exception){
             return new ResponseEntity<ServerResponse>(new ServerResponse(exception.getMessage()), HttpStatus.BAD_REQUEST);

@@ -28,6 +28,14 @@ public class Product {
         this.inCart = inCart;
         this.cat = cat;
     }
+    public Product(Long pid,String name, String productType, float basePrice, boolean inCart, Category cat) {
+        this.name = name;
+        this.productType = productType;
+        this.basePrice = basePrice;
+        this.inCart = inCart;
+        this.cat = cat;
+        this.productId=pid;
+    }
 
     @ManyToOne(cascade=CascadeType.REFRESH)
     @JoinColumn(name="pr_cat_id")
