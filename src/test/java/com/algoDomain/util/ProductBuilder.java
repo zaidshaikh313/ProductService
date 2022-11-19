@@ -14,8 +14,8 @@ public class ProductBuilder {
     public static Category category = new Category(50L,"Electronics",19f,18f,300f);
 
     public static List<ProductResponse> getListProductDto(){
-        return Arrays.asList(new ProductResponse(1L,"Lenevo","Laptop","Electronics",2000f,19f,new Charges(18f,300f),3010f),
-        new ProductResponse(2L,"Dell","Laptop","Electronics",20000f,19f,new Charges(18f,300f),30100f));
+        return Arrays.asList(new ProductResponse(1L,"Lenevo","Laptop","Electronics",2000f,19f,new Charges(18f,300f),3010f,false),
+        new ProductResponse(2L,"Dell","Laptop","Electronics",20000f,19f,new Charges(18f,300f),30100f,false));
 
     }
 
@@ -30,7 +30,7 @@ public class ProductBuilder {
 
     }
     public static ProductResponse getProductDto(){
-        return  new ProductResponse(50L,"HP","Laptop","Electronics",20000f,19f,new Charges(18f,300f),30100f);
+        return  new ProductResponse(50L,"HP","Laptop","Electronics",20000f,19f,new Charges(18f,300f),30100f,false);
     }
     public  static ProductRequestDto getProductRequestDto(){
         return new ProductRequestDto(50L,"HP","Laptop","Electronics",20000f);

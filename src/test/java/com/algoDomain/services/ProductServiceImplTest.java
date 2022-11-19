@@ -46,13 +46,13 @@ class ProductServiceImplTest {
         when(productMapper.DtotoProd(ArgumentMatchers.any())).thenReturn(ProductBuilder.getProduct());
         when(productRepo.findByName(any())).
                 thenReturn(Optional.empty());
-        assertEquals("Product Added Successfully", productService.saveProduct(ProductBuilder.getProductRequestDto()));
+        assertEquals("Product Added Successfully", productService.saveProduct(ProductBuilder.getProductRequestDto()).getMessage());
     }
 
     @Test
     void testDeleteProduct() throws ProductNotFoundException {
         when(productRepo.findById(any())).thenReturn(Optional.of(ProductBuilder.getProduct()));
-        assertEquals("Product deleted successfully",productService.deleteProduct(50L));
+        assertEquals("Product deleted successfully",productService.deleteProduct(50L).getMessage());
     }
 
     @Test
@@ -60,7 +60,7 @@ class ProductServiceImplTest {
         when(productRepo.findById(any())).thenReturn(Optional.of(ProductBuilder.getProduct()));
         when(productRepo.findByName(any())).thenReturn(Optional.empty());
         when(productMapper.DtotoProd(any())).thenReturn(ProductBuilder.getProduct());
-        assertEquals("Product updated successfully",productService.updateProduct(50L,ProductBuilder.getProductRequestDto()));
+        assertEquals("Product updated successfully",productService.updateProduct(50L,ProductBuilder.getProductRequestDto()).getMessage());
     }
 
     @Test
