@@ -1,5 +1,12 @@
 Product Service Application is designed to perform CRUD Operations On Product Entity.
 
+Developed Following functionalities-
+-  Perform CRUD on products
+-  Used H2 Database.
+-  Used Swagger.
+-  Written Test cases
+-  Developed FrontEnd Using Angular for adding and removing products from cart.
+
 
 How To Start The Project - 
 1. Open Project in either Intelij or Eclipse or Spring Boot Tool Suit 
