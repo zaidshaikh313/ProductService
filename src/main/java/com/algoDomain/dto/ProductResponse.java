@@ -11,10 +11,20 @@ public class ProductResponse {
     private Charges charges;
     private float finalPrice;
 
+    private boolean inCart;
+
+    public boolean isInCart() {
+        return inCart;
+    }
+
+    public void setInCart(boolean inCart) {
+        this.inCart = inCart;
+    }
+
     public ProductResponse() {
     }
 
-    public ProductResponse(Long id, String name, String productType, String category, float basePrice, float discount, Charges charges, float finalPrice) {
+    public ProductResponse(Long id, String name, String productType, String category, float basePrice, float discount, Charges charges, float finalPrice,boolean inCart) {
 
         this.id = id;
         this.name = name;
@@ -24,6 +34,7 @@ public class ProductResponse {
         this.discount = discount;
         this.charges = charges;
         this.finalPrice = finalPrice;
+        this.inCart=inCart;
     }
 
     public Long getId() {

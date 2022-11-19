@@ -1,16 +1,19 @@
 package com.algoDomain.services;
 
 
+import com.algoDomain.dto.ProductResponse;
+import com.algoDomain.dto.ServerResponse;
 import com.algoDomain.exceptions.ProductAlreadyPresentException;
 import com.algoDomain.exceptions.ProductNotFoundException;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public interface CartService {
 
-    public ResponseEntity<?> addToCart(Long pid) throws ProductAlreadyPresentException;
-    public ResponseEntity<?> removeFromCart(Long pid) throws ProductNotFoundException;
+    public ServerResponse addToCart(Long pid) throws ProductAlreadyPresentException;
+    public ServerResponse removeFromCart(Long pid) throws ProductNotFoundException;
 
-    public ResponseEntity<?> getAllInCart();
+    public List<ProductResponse> getAllInCart();
 }

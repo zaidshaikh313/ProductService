@@ -43,7 +43,8 @@ public class ProductMapper {
                 product.getBasePrice(),
                 discount,
                 new Charges(gst, category.getDel_charges()),
-                finalPrice
+                finalPrice,
+                product.isInCart()
         );
     }
 

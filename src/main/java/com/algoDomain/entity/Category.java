@@ -3,6 +3,8 @@ package com.algoDomain.entity;
 import javax.persistence.*;
 import java.util.List;
 
+
+//Creating Category Table
 @Entity
 public class Category {
 
@@ -19,6 +21,8 @@ public class Category {
     public Category() {
     }
 
+    //Constructors
+
     public Category(String cat_name, float discount, float gst, float del_charges) {
         this.cat_name = cat_name;
         this.discount = discount;
@@ -32,6 +36,8 @@ public class Category {
         this.gst = gst;
         this.del_charges = del_charges;
     }
+
+    //Getters And Setters
 
     public Long getCat_id() {
         return cat_id;
@@ -83,7 +89,6 @@ public class Category {
                 ", del_charges=" + del_charges +
                 '}';
     }
-    //    @OneToMany(cascade= CascadeType.REFRESH, fetch=FetchType.EAGER)
-//    private List<Product> productList;
+
 
 }

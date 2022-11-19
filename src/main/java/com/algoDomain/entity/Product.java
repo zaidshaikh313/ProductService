@@ -2,6 +2,8 @@ package com.algoDomain.entity;
 
 import javax.persistence.*;
 
+
+//Creating Product Table
 @Entity
 public class Product {
     @Id
@@ -13,14 +15,13 @@ public class Product {
 
     private boolean inCart;
 
-    public boolean isInCart() {
-        return inCart;
-    }
+    //Mapping with category to store category id in product table
+    @ManyToOne(cascade=CascadeType.REFRESH)
+    @JoinColumn(name="pr_cat_id")
+    private Category cat;
 
-    public void setInCart(boolean inCart) {
-        this.inCart = inCart;
-    }
 
+ //Constructor for creating product entity
     public Product(String name, String productType, float basePrice, boolean inCart, Category cat) {
         this.name = name;
         this.productType = productType;
@@ -37,13 +38,20 @@ public class Product {
         this.productId=pid;
     }
 
-    @ManyToOne(cascade=CascadeType.REFRESH)
-    @JoinColumn(name="pr_cat_id")
-    private Category cat;
 
 
     public Product() {
     }
+
+    //Getters And Setters to get and set all attributes
+    public boolean isInCart() {
+        return inCart;
+    }
+
+    public void setInCart(boolean inCart) {
+        this.inCart = inCart;
+    }
+
 
     public Long getProductId() {
         return productId;

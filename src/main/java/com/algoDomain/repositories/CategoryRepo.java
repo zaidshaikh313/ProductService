@@ -6,6 +6,8 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.Optional;
 
+//Category Repository to perform Operations on Category entity
+
 public interface CategoryRepo extends JpaRepository<Category,Long> {
 
 
